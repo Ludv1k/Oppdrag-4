@@ -10,7 +10,9 @@ body {
 
     width: 100%;
     height: 13vh;
-    background-color: #392F5A;
+
+    background-color: #1c1925;
+    color: #FFF8F0;
 }
 
 .navcontent {
@@ -27,8 +29,8 @@ body {
     height: 13vh;
     width: 10vw;
 
-    background-color: #392F5A;
-    color: #FFF8F0;
+    background-color: #1c1925;
+    color: #fff;
 
     border: none;
 
@@ -36,7 +38,7 @@ body {
 
 .topnav button:hover {
     transition: 0.5s;
-    background-color: #9DD9D2;
+    background-color: #fff;
     color: #1c1925;
     cursor: pointer;
 }
