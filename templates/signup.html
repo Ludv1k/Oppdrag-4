@@ -6,8 +6,7 @@ Sign up
 
 {% block body %}
 <h2>Sign up</h2>
-<form method="post">
-    <form method="post"></form>
+<form method="post" action="/submit">
     <label for="first_name">First Name:</label>
     <input type="text" id="first_name" name="first_name" required>
 
@@ -20,6 +19,6 @@ Sign up
     <label for="password">Password:</label>
     <input type="text" id="password" name="password" required>
     
-    <input type="submit">Sing up</input>
+    <input type="submit" value="Sign up"></input>
 </form>
 {% endblock %}

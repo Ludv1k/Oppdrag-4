@@ -42,13 +42,13 @@ def submit():
         flash('Invalid email format.', 'danger')
         return redirect(url_for(signup))
 
-    hashed_password = generate_password_hash(password, method='sha256')
+    # hashed_password = generate_password_hash(password, method='sha256')
 
     try:
         conn = pymysql.connect(**db_config)
         cursor = conn.cursor()
         query = "INSERT INTO users (first_name, last_name, email, password) VALUES (%s, %s, %s, %s)"
-        cursor.execute(query, (first_name, last_name, email, hashed_password))
+        cursor.execute(query, (first_name, last_name, email, password))
         conn.commit()
         cursor.close()
         conn.close()
