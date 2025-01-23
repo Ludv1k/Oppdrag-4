@@ -27,17 +27,21 @@ def root():
 
 @app.route('/signup', methods=['POST'])
 def signup():
+    return render_template('signup.html')
+
+@app.route('/submit')
+def submit():
     first_name = request.form['first_name']
     last_name = request.form['last_name']
     email = request.form['email']
     password = request.form['password']
-    
+
     if not is_valid_email(email):
         flash('Invalid email format.', 'danger')
         return redirect(url_for(signup))
-    
+
     hashed_password = generate_password_hash(password, method='sha256')
-    
+
     try:
         conn = pymysql.connect(**db_config)
         cursor = conn.cursor()
@@ -51,7 +55,6 @@ def signup():
         flash('Email already exists or another error occurred.', 'danger')
         print(f"Error: {e}")
         return redirect(url_for('signup'))
-    return render_template('signup.html')
 
 
 
