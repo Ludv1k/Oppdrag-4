@@ -12,3 +12,4 @@
 
 ## Thursday 23.01
 * Dropped the previous database in order to make a better organized one
+* Got sign up to work, so now if you input everything you need, it will send to the database and be stored there.
