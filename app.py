@@ -52,7 +52,7 @@ def submit():
         conn.commit()
         cursor.close()
         conn.close()
-        return redirect(url_for('login'))
+        return redirect('/')
     except Exception as e:
         flash('Email already exists or another error occurred.', 'danger')
         print(f"Error: {e}")
