@@ -5,5 +5,20 @@ Sign up
 {% endblock %}
 
 {% block body %}
-<h1>Sign up page</h1>
+<h2>Sign up</h2>
+<form method="post">
+    <label for="first_name">First Name:</label>
+    <input type="text" id="first_name" name="first_name" required>
+
+    <label for="last_name">Last Name:</label>
+    <input type="text" id="last_name" name="last_name" required>
+    
+    <label for="email">Email:</label>
+    <input type="text" id="email" name="email" required>
+    
+    <label for="password">Password:</label>
+    <input type="text" id="password" name="password" required>
+    
+    <button type="submit">Sign up</button>
+</form>
 {% endblock %}

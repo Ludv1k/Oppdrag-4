@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
-from flask_mysqldb import MySQL
+import pymysql #type: ignore
 from werkzeug.security import generate_password_hash, check_password_hash
 import re 
 
@@ -8,12 +8,12 @@ app = Flask(__name__)
 app.secret_key = 'your_secret_key'
 
 
-app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = 'ludvik'
-app.config['MYSQL_PASSWORD'] = 'Seidou'
-app.config['MYSQL_DATABASE'] = 'user_auth'
-
-mysql = MySQL(app)
+db_config = {
+    'host': 'localhost',
+    'user': 'ludvik',
+    'password': 'Seidou',
+    'database': 'geir_book'
+}
 
 
 def is_valid_email(email):
@@ -25,34 +25,32 @@ def is_valid_email(email):
 def root():
     return render_template('index.html')  # Renders the 'index.html' template
 
-@app.route('/signup', methods=['GET', 'POST'])
+@app.route('/signup', methods=['POST'])
 def signup():
-    if request.method == 'POST':
-        first_name = request.form['first_name']
-        last_name = request.form['last_name']
-        email = request.form['email']
-        password = request.form['password']
-
-        if not is_valid_email(email):
-            flash('Invalid email format.', 'danger')
-            return redirect(url_for(signup))
-        
-        hashed_password = generate_password_hash(password, method='sha256')
-        
-        try:
-            cursor = mysql.connection.cursor()
-            cursor.execute(
-                "INSERT INTO users (first_name, last_name, email, password) VALUES (%s, %s, %s, %s)",
-                (first_name, last_name, email, hashed_password)
-            )
-            mysql.connection.commit()
-            cursor.close()
-            flash('Account created successfully!', 'success')
-            return redirect(url_for('login'))
-        except Exception as e:
-            flash('Email already exists or another error occurred.', 'danger')
-            print(f"Error: {e}")
-            return redirect(url_for('signup'))
+    first_name = request.form['first_name']
+    last_name = request.form['last_name']
+    email = request.form['email']
+    password = request.form['password']
+    
+    if not is_valid_email(email):
+        flash('Invalid email format.', 'danger')
+        return redirect(url_for(signup))
+    
+    hashed_password = generate_password_hash(password, method='sha256')
+    
+    try:
+        conn = pymysql.connect(**db_config)
+        cursor = conn.cursor()
+        query = "INSERT INTO users (first_name, last_name, email, password) VALUES (%s, %s, %s, %s)"
+        cursor.execute(query, (first_name, last_name, email, hashed_password))
+        conn.commit()
+        cursor.close()
+        conn.close()
+        return redirect(url_for('login'))
+    except Exception as e:
+        flash('Email already exists or another error occurred.', 'danger')
+        print(f"Error: {e}")
+        return redirect(url_for('signup'))
     return render_template('signup.html')
 
 
