@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
-from flask_mysql_connector import MySQL
+from flask_mysqldb import MySQL
 from werkzeug.security import generate_password_hash, check_password_hash
 import re 
 
@@ -40,19 +40,21 @@ def signup():
         hashed_password = generate_password_hash(password, method='sha256')
         
         try:
-            conn = mysql.connection
-            cursor = conn.cursor()
+            cursor = mysql.connection.cursor()
             cursor.execute(
                 "INSERT INTO users (first_name, last_name, email, password) VALUES (%s, %s, %s, %s)",
                 (first_name, last_name, email, hashed_password)
             )
-            conn.commit()
+            mysql.connection.commit()
+            cursor.close()
             flash('Account created successfully!', 'success')
             return redirect(url_for('login'))
-        except:
-            flash('Account already exists or another error occurred.', 'danger')
-            return(url_for(signup))
+        except Exception as e:
+            flash('Email already exists or another error occurred.', 'danger')
+            print(f"Error: {e}")
+            return redirect(url_for('signup'))
     return render_template('signup.html')
+
 
 
 # Run the Flask app
