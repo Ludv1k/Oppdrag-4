@@ -38,7 +38,7 @@ def submit():
 
     if not is_valid_email(email):
         flash('Invalid email format.', 'danger')
-        return redirect(url_for(signup))
+        return redirect(url_for('signup'))
 
     # hashed_password = generate_password_hash(password, method='sha256')
 
