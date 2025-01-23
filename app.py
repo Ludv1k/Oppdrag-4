@@ -25,11 +25,11 @@ def is_valid_email(email):
 def root():
     return render_template('index.html')  # Renders the 'index.html' template
 
-@app.route('/signup', methods=['POST'])
+@app.route('/signup')
 def signup():
     return render_template('signup.html')
 
-@app.route('/submit')
+@app.route('/submit', methods=['POST'])
 def submit():
     first_name = request.form['first_name']
     last_name = request.form['last_name']
