@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, url_for, flash, session
 import pymysql #type: ignore
 # from werkzeug.security import generate_password_hash, check_password_hash
 import re 
@@ -23,7 +23,7 @@ def is_valid_email(email):
 # Route for the homepage
 @app.route('/')
 def root():
-    # first_name = session.get('first_name')
+    first_name = session.get('first_name')
     return render_template('index.html')  # Renders the 'index.html' template
 
 @app.route('/signup', methods=['GET', 'POST'])
@@ -74,10 +74,10 @@ def login():
             conn.close()
 
             if user:
-                stored_password = user[0]
+                first_name, stored_password = user
                 if password == stored_password:
-                    # session['first_name'] = first_name
-                    flash('Logged in successfully!', 'success')
+                    session['first_name'] = first_name
+                    flash(f'Welcome back, {first_name}!', 'success')
                     return redirect(url_for('registering_book'))
                 else:
                     flash('Incorrect password. Please try again', 'danger')
@@ -92,6 +92,9 @@ def login():
 
 @app.route('/registering_book', methods=['GET', 'POST'])
 def registering_book():
+    if 'first_name' not in session:
+        flash('Please log in to access this page.', 'danger')
+        return redirect(url_for('login'))
     return render_template('registering_book.html')
 
 @app.route('/book', methods=['POST'])
@@ -115,11 +118,11 @@ def book():
         print(f"Error: {e}")
         return redirect(url_for('root'))
 
-# @app.route('/logout')
-# def logout():
-#     session.pop('first_name', None)
-#     flash('You have been logged out.', 'info')
-#     return redirect(url_for('root'))
+@app.route('/logout')
+def logout():
+    session.pop('first_name', None)
+    flash('You have been logged out.', 'info')
+    return redirect(url_for('root'))
 
 
 # Run the Flask app
