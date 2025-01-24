@@ -8,3 +8,10 @@ CREATE TABLE users (
     email VARCHAR(255) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL
 );
+
+CREATE TABLE books (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name_of_book VARCHAR(50) NOT NULL,
+    author VARCHAR(50) NOT NULL,
+    language_for_translation VARCHAR(50) NOT NULL
+);

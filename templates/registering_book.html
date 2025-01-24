@@ -1,0 +1,27 @@
+{% extends 'base.html'%}
+
+{% block nav_title %}
+Register your book
+{% endblock %}
+
+{% block body %}
+<h1>Register a book!</h1>
+<form method="post" action="/book" class="signup">
+    <div class="signup_content">
+        <div>
+            <label for="name_of_book">Name of the book:</label>
+            <input type="text" id="name_of_book" name="name_of_book" required class="signup_field">
+        </div>
+        <div>
+            <label for="author">Author:</label>
+            <input type="text" id="author" name="author" required class="signup_field">
+        </div>
+        <div>
+            <label for="language_for_translation">Language you want to translate to:</label>
+            <input type="text" id="language_for_translation" name="language_for_translation" required class="signup_field">
+        </div>
+        
+        <input type="submit" value="Register book" class="signup_submit"></input>
+    </div>
+</form>
+{% endblock %}

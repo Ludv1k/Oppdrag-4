@@ -14,7 +14,7 @@
             <h1>{% block nav_title %}{% endblock %}</h1>
             <div class="navbtn">
                 <button onclick="location.href='/'"><h3>Home</h3></button>
-                <button onclick="location.href='/signup'"><h3>Sign up</h3></button>
+                {% block sign_log_btn %}{% endblock %}
             </div>
         </div>
     </div>

@@ -16,4 +16,4 @@
 
 ## Friday 24.01
 * NOT DOCUMENTATION: registering a new book make it the same way as registering a new user
-* plz get done with login!!! holy theres so much i need to do and im just gonna continue writing because river is laughing  
+* plz get done with login!!!

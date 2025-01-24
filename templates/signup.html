@@ -4,6 +4,10 @@
 Sign up
 {% endblock %}
 
+{% block sign_log_btn %}
+<button onclick="location.href='/login'"><h3>Login</h3></button>
+{% endblock %}
+
 {% block body %}
 <h1 class="signup">Make a new user!</h1>
 <form method="post" action="/submit" class="signup">
@@ -22,7 +26,7 @@ Sign up
         </div>
         <div>
             <label for="password">Password:</label>
-            <input type="text" id="password" name="password" required class="signup_field">
+            <input type="password" id="password" name="password" required class="signup_field">
         </div>
         
         <input type="submit" value="Sign up" class="signup_submit"></input>

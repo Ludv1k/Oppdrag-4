@@ -23,6 +23,7 @@ def is_valid_email(email):
 # Route for the homepage
 @app.route('/')
 def root():
+    # first_name = session.get('first_name')
     return render_template('index.html')  # Renders the 'index.html' template
 
 @app.route('/signup', methods=['GET', 'POST'])
@@ -73,10 +74,11 @@ def login():
             conn.close()
 
             if user:
-                stored_password = user[0]
+                stored_password = user
                 if password == stored_password:
+                    # session['first_name'] = first_name
                     flash('Logged in successfully!', 'success')
-                    return redirect(url_for('root'))
+                    return redirect(url_for('/register_book'))
                 else:
                     flash('Incorrect password. Please try again', 'danger')
             else:
@@ -87,6 +89,37 @@ def login():
         
         return redirect(url_for('login'))
     return render_template('login.html')
+
+@app.route('/register_book', methods=['GET', 'POST'])
+def resgister():
+    return render_template('registering_book.html')
+
+@app.route('/book', methods=['POST'])
+def book():
+    name_of_book = request.form['name_of_book']
+    author = request.form['author']
+    language_for_translation = request.form['language_for_translation']
+
+
+    try:
+        conn = pymysql.connect(**db_config)
+        cursor = conn.cursor()
+        query = "INSERT INTO books (name_of_book, author, language_for_translation) VALUES (%s, %s, %s)"
+        cursor.execute(query, (name_of_book, author, language_for_translation))
+        conn.commit()
+        cursor.close()
+        conn.close()
+        return redirect('/')
+    except Exception as e:
+        flash('An error occurred.', 'danger')
+        print(f"Error: {e}")
+        return redirect(url_for('root'))
+
+# @app.route('/logout')
+# def logout():
+#     session.pop('first_name', None)
+#     flash('You have been logged out.', 'info')
+#     return redirect(url_for('root'))
 
 
 # Run the Flask app
