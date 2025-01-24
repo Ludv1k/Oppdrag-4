@@ -74,7 +74,7 @@ def login():
             conn.close()
 
             if user:
-                stored_password = user
+                stored_password = user[0]
                 if password == stored_password:
                     # session['first_name'] = first_name
                     flash('Logged in successfully!', 'success')
@@ -91,7 +91,7 @@ def login():
     return render_template('login.html')
 
 @app.route('/registering_book', methods=['GET', 'POST'])
-def resgistering_book():
+def registering_book():
     return render_template('registering_book.html')
 
 @app.route('/book', methods=['POST'])
