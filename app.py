@@ -78,7 +78,7 @@ def login():
                 if password == stored_password:
                     # session['first_name'] = first_name
                     flash('Logged in successfully!', 'success')
-                    return redirect(url_for('/register_book'))
+                    return redirect(url_for('/registering_book'))
                 else:
                     flash('Incorrect password. Please try again', 'danger')
             else:
