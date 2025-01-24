@@ -90,8 +90,8 @@ def login():
         return redirect(url_for('login'))
     return render_template('login.html')
 
-@app.route('/register_book', methods=['GET', 'POST'])
-def resgister():
+@app.route('/registering_book', methods=['GET', 'POST'])
+def resgistering_book():
     return render_template('registering_book.html')
 
 @app.route('/book', methods=['POST'])
