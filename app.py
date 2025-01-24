@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
 import pymysql #type: ignore
-from werkzeug.security import generate_password_hash, check_password_hash
+# from werkzeug.security import generate_password_hash, check_password_hash
 import re 
 
 # Create the Flask app
@@ -56,6 +56,9 @@ def submit():
         print(f"Error: {e}")
         return redirect(url_for('signup'))
 
+@app.route('/login')
+def login():
+    return render_template('login.html')
 
 
 # Run the Flask app

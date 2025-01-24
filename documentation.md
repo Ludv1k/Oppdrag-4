@@ -13,3 +13,7 @@
 ## Thursday 23.01
 * Dropped the previous database in order to make a better organized one
 * Got sign up to work, so now if you input everything you need, it will send to the database and be stored there.
+
+## Friday 24.01
+* NOT DOCUMENTATION: registering a new book make it the same way as registering a new user
+* plz get done with login!!! holy theres so much i need to do and im just gonna continue writing because river is laughing  

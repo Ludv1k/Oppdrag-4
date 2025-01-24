@@ -5,9 +5,9 @@ Sign up
 {% endblock %}
 
 {% block body %}
-<h2>Sign up</h2>
-<form method="post" action="/submit">
-    <div class="signup">
+<h1 class="signup">Make a new user!</h1>
+<form method="post" action="/submit" class="signup">
+    <div class="signup_content">
         <div>
             <label for="first_name">First Name:</label>
             <input type="text" id="first_name" name="first_name" required class="signup_field">
@@ -25,7 +25,10 @@ Sign up
             <input type="text" id="password" name="password" required class="signup_field">
         </div>
         
-        <input type="submit" value="Sign up"></input>
+        <input type="submit" value="Sign up" class="signup_submit"></input>
     </div>
 </form>
+<div class="signup_login_redirect">
+    <a href="/login">If you already have a user, then Log in.</a>
+</div>
 {% endblock %}
