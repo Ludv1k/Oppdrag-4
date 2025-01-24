@@ -56,8 +56,36 @@ def submit():
         print(f"Error: {e}")
         return redirect(url_for('signup'))
 
-@app.route('/login')
+@app.route('/login', methods=['GET', 'POST'])
 def login():
+    if request.method == 'POST':
+        email = request.form['email']
+        password = request.form['password']
+
+        try:
+            conn = pymysql.connect(**db_config)
+            cursor = conn.cursor()
+
+            query = "SELECT password FROM users WHERE email = %s"
+            cursor.execute(query, (email,))
+            user = cursor.fetchone()
+            cursor.close()
+            conn.close()
+
+            if user:
+                stored_password = user[0]
+                if password == stored_password:
+                    flash('Logged in successfully!', 'success')
+                    return redirect(url_for('root'))
+                else:
+                    flash('Incorrect password. Please try again', 'danger')
+            else:
+                flash('No account found with that email. Please sign up.', 'danger')
+        except Exception as e:
+            flash('An error occurred. Please try again later.', 'danger')
+            print(f"Error: {e}")
+        
+        return redirect(url_for('login'))
     return render_template('login.html')
 
 
