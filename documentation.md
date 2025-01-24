@@ -15,5 +15,7 @@
 * Got sign up to work, so now if you input everything you need, it will send to the database and be stored there.
 
 ## Friday 24.01
-* NOT DOCUMENTATION: registering a new book make it the same way as registering a new user
-* plz get done with login!!!
+* Made a table for book registration
+* Made it so that you can add books to that table
+* Got done with login.
+* Created a mariadb user for Geir, with password being "gpttrans"

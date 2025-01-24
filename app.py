@@ -10,8 +10,8 @@ app.secret_key = 'your_secret_key'
 
 db_config = {
     'host': 'localhost',
-    'user': 'ludvik',
-    'password': 'Seidou',
+    'user': 'geir',
+    'password': 'gpttrans',
     'database': 'geir_book'
 }
 
