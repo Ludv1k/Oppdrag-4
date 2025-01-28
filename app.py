@@ -67,7 +67,7 @@ def login():
             conn = pymysql.connect(**db_config)
             cursor = conn.cursor()
 
-            query = "SELECT password FROM users WHERE email = %s"
+            query = "SELECT first_name, password FROM users WHERE email = %s"
             cursor.execute(query, (email,))
             user = cursor.fetchone()
             cursor.close()
