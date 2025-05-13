@@ -1,0 +1,12 @@
+[
+    {
+        "name": "water",
+        "quantity": 999,
+        "price": 2.5
+    },
+    {
+        "name": "Bread",
+        "quantity": 999,
+        "price": 5.0
+    }
+]

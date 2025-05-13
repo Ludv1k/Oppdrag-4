@@ -6,7 +6,7 @@ ___
 
 A python system that can:
 * Register new wares.
+* Delete new wares.
 * Show the stock of wares.
 * Search up wares.
-* Update amount of wares after recieving, or giving.
-* Show a simple report of stock.
+* Show a simple report of what items are in stocks.
